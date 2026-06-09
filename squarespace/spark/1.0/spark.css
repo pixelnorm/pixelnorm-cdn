@@ -276,3 +276,65 @@ html.spark-dark ::selection {
 html.spark-dark [style*="opacity"] {
  opacity:1!important;
 }
+
+/* =========================
+SPARK BUTTON FIX
+========================= */
+
+/* Squarespace buttons */
+
+html.spark-dark .sqs-button-element,
+html.spark-dark .sqs-block-button-element,
+html.spark-dark a[class*="button"],
+html.spark-dark a[class*="Button"] {
+  background:transparent!important;
+  color:#fff!important;
+  border-color:#777!important;
+}
+
+
+/* button hover */
+
+html.spark-dark .sqs-button-element:hover,
+html.spark-dark .sqs-block-button-element:hover,
+html.spark-dark a[class*="button"]:hover,
+html.spark-dark a[class*="Button"]:hover {
+  background:#fff!important;
+  color:#000!important;
+  border-color:#fff!important;
+}
+
+
+/* keep text inside hover correct */
+
+html.spark-dark .sqs-button-element:hover *,
+html.spark-dark .sqs-block-button-element:hover * {
+  color:#000!important;
+}
+
+
+
+/* =========================
+VIDEO BACKGROUND FIX
+========================= */
+
+/* allow Squarespace video layers */
+
+html.spark-dark .section-background,
+html.spark-dark .section-background-content,
+html.spark-dark .section-background-video,
+html.spark-dark .sqs-video-background,
+html.spark-dark .sqs-video-background-native,
+html.spark-dark video {
+  background:transparent!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+
+
+/* prevent overlays hiding videos */
+
+html.spark-dark .section-background:before,
+html.spark-dark .section-background:after {
+  background:transparent!important;
+}
