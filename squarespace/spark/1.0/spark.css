@@ -1,0 +1,179 @@
+
+---
+
+## spark/1.0/spark.css  
+## spark/latest/spark.css
+
+Create BOTH files with this content:
+
+```css
+/*
+=================================
+PixelNorm SPARK
+Version: 1.0
+Dark / Light Theme Engine
+=================================
+*/
+
+
+/* =========================
+THEME BUTTON
+========================= */
+
+.spark-theme-toggle {
+  width:34px;
+  height:34px;
+  border:none;
+  background:transparent;
+  cursor:pointer;
+  color:inherit;
+  font-size:20px;
+}
+
+
+/* =========================
+DARK BACKGROUND
+========================= */
+
+html.spark-dark,
+html.spark-dark body,
+html.spark-dark #siteWrapper,
+html.spark-dark .site-wrapper,
+html.spark-dark main,
+html.spark-dark section,
+html.spark-dark .page-section,
+html.spark-dark .content-wrapper,
+html.spark-dark footer {
+  background:#050505!important;
+}
+
+
+/* =========================
+TEXT
+========================= */
+
+html.spark-dark,
+html.spark-dark body,
+html.spark-dark h1,
+html.spark-dark h2,
+html.spark-dark h3,
+html.spark-dark h4,
+html.spark-dark p,
+html.spark-dark a,
+html.spark-dark span,
+html.spark-dark li,
+html.spark-dark strong,
+html.spark-dark b,
+html.spark-dark .sqs-block-content,
+html.spark-dark .sqs-block-content * {
+  color:#f5f5f5!important;
+}
+
+
+/* =========================
+HEADER
+========================= */
+
+html.spark-dark header,
+html.spark-dark #header,
+html.spark-dark .Header,
+html.spark-dark .header,
+html.spark-dark .header-inner,
+html.spark-dark .header-background,
+html.spark-dark .header-display-desktop,
+html.spark-dark .header-display-mobile,
+html.spark-dark .header-actions,
+html.spark-dark [class*="header"] {
+ background:#050505!important;
+}
+
+
+/* Header divider */
+
+html.spark-dark header .header-display-desktop {
+ border-bottom:solid 1px #555!important;
+}
+
+
+/* =========================
+DROPDOWN MENU
+========================= */
+
+html.spark-dark .header-nav-folder-content {
+ background:#050505!important;
+ border:1px solid #555!important;
+}
+
+
+html.spark-dark .header-nav-folder-item {
+ border-bottom:1px solid #555!important;
+}
+
+
+html.spark-dark .header-nav-folder-item:hover {
+ background:#333!important;
+}
+
+
+/* =========================
+LOGOS + ICONS
+========================= */
+
+html.spark-dark header img,
+html.spark-dark .header-title-logo img,
+html.spark-dark #footer-sections img {
+ filter:invert(1)!important;
+}
+
+
+html.spark-dark svg,
+html.spark-dark svg path {
+ fill:#fff!important;
+ stroke:#fff!important;
+}
+
+
+/* keep images untouched */
+
+html.spark-dark main img,
+html.spark-dark .gallery img,
+html.spark-dark .sqs-image img {
+ filter:none!important;
+}
+
+
+/* =========================
+LINES
+========================= */
+
+html.spark-dark hr {
+ border-color:#555!important;
+}
+
+
+html.spark-dark * {
+ --tweak-line-color:#555!important;
+}
+
+
+/* =========================
+FORMS
+========================= */
+
+html.spark-dark button,
+html.spark-dark input,
+html.spark-dark textarea {
+ background:#050505!important;
+ color:#fff!important;
+ border-color:#777!important;
+}
+
+
+/* =========================
+SELECTION
+========================= */
+
+html.spark-dark ::selection {
+ background:#fff;
+ color:#000;
+}
