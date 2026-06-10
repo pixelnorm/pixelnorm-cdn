@@ -9,7 +9,7 @@ Theme Styles
 
 /* SPARK - Custom Styling */
 
-.page-section:first-child{
+#page .page-section:first-child{
   padding-top: 66px !important;
 }
 .header-width-inset .header-inner {
