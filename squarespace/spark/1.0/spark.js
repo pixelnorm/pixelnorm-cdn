@@ -6,6 +6,39 @@ Theme Controller
 =================================
 */
 
+/* =========================
+SPARK PAGE LOADER
+========================= */
+
+(function(){
+
+let loader=document.createElement("div");
+
+loader.className="spark-loader";
+
+loader.innerHTML=`
+<div class="spark-loader-title">
+${document.title.split("|")[0]}
+</div>
+`;
+
+document.documentElement.appendChild(loader);
+
+
+window.addEventListener("load",function(){
+
+setTimeout(function(){
+
+document.documentElement.classList.add("spark-loaded");
+
+},500);
+
+});
+
+
+})();
+
+/*Global Scripts*/
 
 document.addEventListener("DOMContentLoaded", function(){
 
