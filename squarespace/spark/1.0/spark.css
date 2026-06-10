@@ -229,7 +229,6 @@ html.spark-dark header:after {
 
 /* header lines */
 
-html.spark-dark .header-border,
 html.spark-dark header .header-display-desktop {
   border-bottom:solid 1px #555!important;
 }
