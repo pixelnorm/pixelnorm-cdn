@@ -7,7 +7,6 @@ Theme Styles
 ================================
 */
 
-
 /* SPARK - Custom Styling */
 
 .page-section:first-child{
@@ -21,6 +20,9 @@ Theme Styles
   border-bottom: solid 1px #000;
   padding-top: 0px;
   padding-bottom: 10px;
+}
+.header-border{
+    border: none !important;
 }
 .header-nav-item a{
   text-transform: none;
@@ -94,6 +96,14 @@ Theme Styles
 /*body:before{
   content:"";
 }/*
+
+/*
+================================
+PixelNorm SPARK
+Version 1.0
+Theme Styles
+================================
+*/
 
 
 /* =========================
@@ -225,8 +235,12 @@ html.spark-dark .header,
 html.spark-dark .header-inner {
   box-shadow:none!important;
 }
-
-
+html.spark-dark .header-nav-item.header-nav-item--folder{
+  background:transparent!important;
+}
+html.spark-dark .header-border{
+    border: none !important;
+}
 /* =========================
 MOBILE MENU
 ========================= */
