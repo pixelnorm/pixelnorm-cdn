@@ -1,5 +1,103 @@
+
+/*
+================================
+PixelNorm SPARK
+Version 1.0
+Theme Styles
+================================
+*/
+
+
+/* SPARK - Custom Styling */
+
+.page-section:first-child{
+  padding-top: 66px !important;
+}
+.header-width-inset .header-inner {
+  padding: 10px 0 10px 0;
+}
+.header-display-desktop {
+  border-top: none;
+  border-bottom: solid 1px #000;
+  padding-top: 0px;
+  padding-bottom: 10px;
+}
+.header-nav-item a{
+  text-transform: none;
+  letter-spacing: 0px;
+  font-size: 1rem;
+}
+.header-nav .header-nav-item--folder .header-nav-folder-content {
+  left: 0em;
+    top: 2.68em;
+  border: solid 1px #000;
+  padding:0;
+}
+.header-nav .header-nav-item--folder .header-nav-folder-content .header-nav-folder-item {
+  line-height: 1.3;
+  border-bottom: solid 1px #000;
+  padding: 0.75em;
+}
+.header-nav .header-nav-item--folder .header-nav-folder-content .header-nav-folder-item:last-child {
+  border-bottom: 0;
+}
+.header-nav-folder-item--active{
+  background: #eee;
+}
+.header-nav-folder-item--active a span{
+  text-decoration:none !important;
+}
+/* Dropdown position */
+.header-nav-folder-content {
+  top: 37.5px !important;
+}
+.header-nav .header-nav-item--folder .header-nav-folder-content .header-nav-folder-item:hover {  
+  background: #eee;
+}
+/* Create invisible hover bridge */
+.header-nav-item--folder {
+  padding-bottom: 40px;
+  margin-bottom: -40px;
+}
+.gallery-masonry[data-width="full"] {
+  padding-top: 1vw;
+  padding-bottom: 0;
+}
+.gallery-strips[data-width="inset"] {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+/* SPARK - Form Error Styling */
+
+.form-field-error,
+.form-field-error-message,
+.form-submission-text,
+.field-error,
+.caption-text.error {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+/* SPARK - Text Selection */
+
+::selection {
+  background:#000;
+  color:#fff;
+}
+
+::-moz-selection {
+  background:#000;
+  color:#fff;
+}
+/* PixelNorm SPARK Loader */
+
+/*body:before{
+  content:"";
+}/*
+
+
 /* =========================
-SPARK THEME TOGGLE BUTTON
+THEME TOGGLE BUTTON
 ========================= */
 
 .spark-theme-toggle {
@@ -7,8 +105,8 @@ SPARK THEME TOGGLE BUTTON
   width:auto;
   height:auto;
   margin-right:18px;
-  border:none;
-  background:transparent;
+  border:none!important;
+  background:transparent!important;
   color:inherit;
   cursor:pointer;
   font-size:18px;
@@ -25,11 +123,37 @@ html.spark-dark body,
 html.spark-dark #siteWrapper,
 html.spark-dark .site-wrapper,
 html.spark-dark main,
-html.spark-dark section,
-html.spark-dark .page-section,
 html.spark-dark .content-wrapper,
 html.spark-dark footer {
   background:#050505!important;
+}
+
+
+/* normal sections */
+
+html.spark-dark section:not([data-current-context*="video"]),
+html.spark-dark .page-section:not([data-current-context*="video"]) {
+  background:#050505!important;
+}
+
+
+/* keep Squarespace video backgrounds alive */
+
+html.spark-dark section[data-current-context*="video"],
+html.spark-dark .page-section[data-current-context*="video"] {
+  background:transparent!important;
+}
+
+
+/* video layers */
+
+html.spark-dark .section-background,
+html.spark-dark .section-background video,
+html.spark-dark .section-background iframe,
+html.spark-dark .sqs-video-background,
+html.spark-dark .sqs-video-background video {
+  opacity:1!important;
+  visibility:visible!important;
 }
 
 
@@ -69,67 +193,43 @@ html.spark-dark .header-display-desktop,
 html.spark-dark .header-display-mobile,
 html.spark-dark .header-layout,
 html.spark-dark .header-layout-wrapper,
-html.spark-dark .header-layout-nav-center,
-html.spark-dark .header-title-nav-wrapper,
 html.spark-dark .header-nav-wrapper,
 html.spark-dark .header-actions,
 html.spark-dark .header-actions-container,
-html.spark-dark .header-announcement-bar-wrapper,
 html.spark-dark [class*="header"] {
   background:#050505!important;
   background-color:#050505!important;
 }
 
 
-/* remove Squarespace masks */
+/* remove header masks */
 
 html.spark-dark .header-background:before,
 html.spark-dark .header-background:after,
 html.spark-dark header:before,
-html.spark-dark header:after,
-html.spark-dark .header:before,
-html.spark-dark .header:after,
-html.spark-dark .header-inner:before,
-html.spark-dark .header-inner:after {
+html.spark-dark header:after {
   display:none!important;
 }
 
 
-/* HEADER LINE */
+/* header lines */
 
-html.spark-dark .header-border {
-  display:block!important;
-  height:1px!important;
-  opacity:1!important;
-  background:#555!important;
-}
-
-
+html.spark-dark .header-border,
 html.spark-dark header .header-display-desktop {
   border-bottom:solid 1px #555!important;
 }
 
 
-html.spark-dark .header-layout-branding-center 
-.header-nav 
-.header-nav-item:not(:last-child) {
-  background:transparent!important;
-}
-
-
 html.spark-dark header,
 html.spark-dark .header,
-html.spark-dark .header-inner,
-html.spark-dark .header-display-desktop {
-  border:0!important;
+html.spark-dark .header-inner {
   box-shadow:none!important;
 }
 
 
 /* =========================
-MOBILE MENU DARK MODE
+MOBILE MENU
 ========================= */
-
 
 html.spark-dark .header-menu,
 html.spark-dark .header-menu-bg,
@@ -144,50 +244,25 @@ html.spark-dark .header-menu * {
 }
 
 
-html.spark-dark .header-menu svg,
-html.spark-dark .header-menu svg path {
- stroke:#fff!important;
- fill:#fff!important;
-}
-
-
-
 /* =========================
-DROPDOWN MENU
+DROPDOWNS
 ========================= */
 
 html.spark-dark 
-.header-nav 
-.header-nav-item--folder 
 .header-nav-folder-content {
-  border:solid 1px #555;
+  background:#050505!important;
+  border:solid 1px #555!important;
 }
 
 
 html.spark-dark 
-.header-nav 
-.header-nav-item--folder 
-.header-nav-folder-content 
 .header-nav-folder-item {
-  border-bottom:solid 1px #555;
   background:transparent!important;
-  color:#fff;
+  border-bottom:solid 1px #555!important;
 }
 
 
 html.spark-dark 
-.header-nav-folder-item--active,
-html.spark-dark 
-.header-nav-folder-item--active * {
-  background:transparent!important;
-  color:#fff!important;
-}
-
-
-html.spark-dark 
-.header-nav 
-.header-nav-item--folder 
-.header-nav-folder-content 
 .header-nav-folder-item:hover {
   background:#333!important;
 }
@@ -204,13 +279,16 @@ html.spark-dark .header * {
 
 
 html.spark-dark header img,
-html.spark-dark .header-title-logo img {
+html.spark-dark .header-title-logo img,
+html.spark-dark #footer-sections img {
   filter:invert(1)!important;
 }
 
 
-html.spark-dark #footer-sections img {
-  filter:invert(1)!important;
+html.spark-dark main img,
+html.spark-dark .gallery img,
+html.spark-dark .sqs-image img {
+  filter:none!important;
 }
 
 
@@ -221,26 +299,44 @@ html.spark-dark svg path {
 }
 
 
-/* CART */
+/* =========================
+BUTTON FIX
+========================= */
 
-html.spark-dark .header-actions-action,
-html.spark-dark .header-actions-action--cart,
-html.spark-dark .cart,
-html.spark-dark .cart-quantity-zero {
+html.spark-dark a.sqs-button-element,
+html.spark-dark .sqs-button-element,
+html.spark-dark .sqs-block-button-element,
+html.spark-dark .sqs-button-element--primary,
+html.spark-dark .sqs-button-element--secondary {
   background:transparent!important;
+  color:#fff!important;
+  border-color:#fff!important;
 }
 
 
-/* KEEP IMAGES NORMAL */
-
-html.spark-dark main img,
-html.spark-dark .gallery img,
-html.spark-dark .sqs-image img {
-  filter:none!important;
+html.spark-dark a.sqs-button-element:hover,
+html.spark-dark .sqs-button-element:hover {
+  background:#fff!important;
+  color:#000!important;
 }
 
 
-/* LINES */
+/* =========================
+FORMS
+========================= */
+
+html.spark-dark input,
+html.spark-dark textarea,
+html.spark-dark select {
+ background:#050505!important;
+ color:#fff!important;
+ border-color:#777!important;
+}
+
+
+/* =========================
+LINES
+========================= */
 
 html.spark-dark hr,
 html.spark-dark .sqs-block-horizontalrule hr {
@@ -254,18 +350,9 @@ html.spark-dark * {
 }
 
 
-/* BUTTONS */
-
-html.spark-dark button,
-html.spark-dark input,
-html.spark-dark textarea {
- background:#050505!important;
- color:#fff!important;
- border-color:#777!important;
-}
-
-
-/* SELECTION */
+/* =========================
+TEXT SELECTION
+========================= */
 
 html.spark-dark ::selection {
  background:#fff;
@@ -273,68 +360,110 @@ html.spark-dark ::selection {
 }
 
 
+/* =========================
+FIX FADED ELEMENTS
+========================= */
+
 html.spark-dark [style*="opacity"] {
  opacity:1!important;
 }
+html.spark-dark .page-section .section-border {
+  background-color:#000;
+}
 
 /* =========================
-SPARK BUTTON FIX
+SPARK PAGE LOADER
 ========================= */
 
-/* Squarespace buttons */
+.spark-loader {
+  position:fixed;
+  inset:0;
+  background:#fff;
+  z-index:999999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:
+    opacity .6s ease,
+    visibility .6s ease;
+}
 
-html.spark-dark .sqs-button-element,
-html.spark-dark .sqs-block-button-element,
-html.spark-dark a[class*="button"],
-html.spark-dark a[class*="Button"] {
+
+/* Site name */
+
+.spark-loader-title {
+  font-size: clamp(14px,1.8vw,20px);
+  letter-spacing: 1em;
+  text-transform:uppercase;
+  font-weight:400;
+}
+
+/* hide */
+
+.spark-loaded .spark-loader {
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+
+/* dark mode support */
+
+html.spark-dark .spark-loader {
+  background:#050505;
+}
+
+html.spark-dark .spark-loader-title {
+  color:#fff;
+}
+
+
+html.spark-dark .gallery-lightbox-background{
+  background:#000;
+}
+
+/* =========================
+SPARK VIDEO SECTION FINAL FIX
+========================= */
+
+
+/* Allow Squarespace video backgrounds to show */
+
+html.spark-dark 
+.page-section[data-current-context*="video"] 
+.content-wrapper,
+
+html.spark-dark 
+section[data-current-context*="video"] 
+.content-wrapper {
   background:transparent!important;
-  color:#fff!important;
-  border-color:#777!important;
+  background-color:transparent!important;
 }
 
 
-/* button hover */
+/* remove overlay above video */
 
-html.spark-dark .sqs-button-element:hover,
-html.spark-dark .sqs-block-button-element:hover,
-html.spark-dark a[class*="button"]:hover,
-html.spark-dark a[class*="Button"]:hover {
-  background:#fff!important;
-  color:#000!important;
-  border-color:#fff!important;
+html.spark-dark 
+.page-section[data-current-context*="video"] 
+.section-background-overlay,
+
+html.spark-dark 
+section[data-current-context*="video"] 
+.section-background-overlay {
+  opacity:0!important;
+  background:transparent!important;
 }
 
 
-/* keep text inside hover correct */
+/* keep video engine visible */
 
-html.spark-dark .sqs-button-element:hover *,
-html.spark-dark .sqs-block-button-element:hover * {
-  color:#000!important;
-}
+html.spark-dark 
+.page-section[data-current-context*="video"] 
+.section-background,
 
-
-
-/* =========================
-VIDEO BACKGROUND FIX
-========================= */
-
-/* allow Squarespace video layers */
-
-html.spark-dark .section-background,
-html.spark-dark .section-background-content,
-html.spark-dark .section-background-video,
-html.spark-dark .sqs-video-background,
-html.spark-dark .sqs-video-background-native,
-html.spark-dark video {
+html.spark-dark 
+section[data-current-context*="video"] 
+.section-background {
   background:transparent!important;
   opacity:1!important;
-  visibility:visible!important;
-}
-
-
-/* prevent overlays hiding videos */
-
-html.spark-dark .section-background:before,
-html.spark-dark .section-background:after {
-  background:transparent!important;
 }
