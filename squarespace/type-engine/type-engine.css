@@ -1,0 +1,90 @@
+/*
+====================================
+PixelNorm Type Engine UI
+====================================
+*/
+
+
+.pn-type-engine {
+
+width:100%;
+padding:60px 0;
+
+}
+
+
+
+/* CANVAS TESTER */
+
+
+.pn-type-canvas {
+
+display:block;
+
+width:100%;
+
+height:auto;
+
+border-bottom:
+1px solid currentColor;
+
+}
+
+
+
+/* GLYPH GRID */
+
+
+.pn-glyph-grid {
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fill,minmax(70px,1fr));
+
+gap:12px;
+
+margin-top:50px;
+
+}
+
+
+
+.pn-glyph {
+
+height:70px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+border:
+1px solid currentColor;
+
+
+font-size:36px;
+
+}
+
+
+
+/* DARK MODE SUPPORT */
+
+html.spark-dark 
+.pn-glyph {
+
+color:white;
+
+border-color:#555;
+
+}
+
+
+html.spark-dark
+.pn-type-canvas {
+
+border-color:#555;
+
+}
