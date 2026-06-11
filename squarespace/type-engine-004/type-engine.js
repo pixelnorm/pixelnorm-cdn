@@ -1,5 +1,5 @@
 /* ==================================================
- PixelNorm Type Engine 003
+ PixelNorm Type Engine 004
  Canvas Protected Renderer
 ================================================== */
 
