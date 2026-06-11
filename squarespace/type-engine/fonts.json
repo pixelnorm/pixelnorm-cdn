@@ -1,0 +1,24 @@
+{
+  "ingrida": {
+    "id": "a82f91",
+    "name": "Ingrida",
+    "designer": "Linien & Kreis",
+
+    "styles": {
+      "light": {
+        "label": "Light",
+        "file": "01"
+      },
+
+      "regular": {
+        "label": "Regular",
+        "file": "02"
+      },
+
+      "bold": {
+        "label": "Bold",
+        "file": "03"
+      }
+    }
+  }
+}
