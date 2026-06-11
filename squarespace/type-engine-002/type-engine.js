@@ -1,7 +1,7 @@
 /* ==================================================
-   PixelNorm Type Engine 001
-   Canvas Font Renderer
-   ================================================== */
+ PixelNorm Type Engine 003
+ Canvas Protected Renderer
+================================================== */
 
 (function(){
 
@@ -12,242 +12,226 @@ const FONT_JSON =
 CDN + "squarespace/type-engine-001/fonts.json";
 
 
-let PN_FONTS = {};
-let PN_RENDERERS = [];
+let fonts = {};
+let canvasRenders = [];
 
 
-/* =========================
-LOAD FONT DATABASE
-========================= */
+/* LOAD JSON */
 
-async function loadFonts(){
+fetch(FONT_JSON)
+.then(r=>r.json())
+.then(data=>{
 
-const res = await fetch(FONT_JSON);
-PN_FONTS = await res.json();
+fonts=data;
 
-initTypeEngine();
+init();
 
-}
+});
 
 
-/* =========================
-LOAD PROTECTED FONT
-========================= */
+/* LOAD FONT */
 
-async function loadFont(fontId, style){
+async function loadFont(id,style){
 
-const font = PN_FONTS[fontId];
-
+let font = fonts[id];
 if(!font) return null;
 
-const item = font.styles[style];
-
+let item = font.styles[style];
 if(!item) return null;
 
 
-const url =
+let path =
 CDN +
 "assets/f/p/" +
-font.id +
+id +
 "/" +
-font.id +
+id +
 "-" +
 item.file +
 ".bin";
 
 
-const buffer = await fetch(url)
-.then(r=>r.arrayBuffer());
+let response =
+await fetch(path);
 
 
-const blob = new Blob(
-[buffer],
-{type:"font/woff2"}
+let buffer =
+await response.arrayBuffer();
+
+
+let face =
+new FontFace(
+id+"-"+style,
+buffer
 );
 
 
-const fontFace = new FontFace(
-font.name + "-" + style,
-`url(${URL.createObjectURL(blob)})`
-);
+await face.load();
+
+document.fonts.add(face);
 
 
-await fontFace.load();
-
-document.fonts.add(fontFace);
-
-return fontFace.family;
+return id+"-"+style;
 
 }
 
 
-/* =========================
-THEME COLOR
-========================= */
 
-function getCanvasColor(){
+/* THEME COLOR */
+
+function themeColor(){
 
 return document.documentElement
-.classList
-.contains("spark-dark")
-? "#ffffff"
-: "#000000";
+.classList.contains("spark-dark")
+?
+"#fff"
+:
+"#000";
 
 }
 
 
-/* =========================
-CANVAS DRAW
-========================= */
+/* CANVAS */
 
-async function drawCanvas(canvas){
-
-const fontId =
-canvas.dataset.font;
-
-const style =
-canvas.dataset.style || "regular";
-
-const text =
-canvas.dataset.text || "Sample Text";
+async function initCanvas(el){
 
 
-const family =
-await loadFont(fontId,style);
+let family =
+await loadFont(
+el.dataset.font,
+el.dataset.style || "regular"
+);
 
 
 if(!family) return;
 
 
-const ctx =
-canvas.getContext("2d");
+let ctx =
+el.getContext("2d");
 
 
-function render(){
+function draw(){
+
 
 ctx.clearRect(
 0,
 0,
-canvas.width,
-canvas.height
+el.width,
+el.height
 );
 
 
 ctx.fillStyle =
-getCanvasColor();
+themeColor();
+
+
+ctx.font =
+"100px '"+family+"'";
 
 
 ctx.textBaseline =
 "middle";
 
 
-ctx.font =
-"90px '" + family + "'";
-
-
 ctx.fillText(
-text,
+el.dataset.text || "Ingrida",
 40,
-canvas.height/2
+el.height/2
 );
 
-}
-
-
-render();
-
-
-PN_RENDERERS.push(render);
 
 }
 
 
-/* =========================
-GLYPH GRID
-========================= */
-
-async function drawGlyphGrid(el){
-
-const fontId =
-el.dataset.font;
-
-const style =
-el.dataset.style || "regular";
+draw();
 
 
-const family =
-await loadFont(fontId,style);
+canvasRenders.push(draw);
+
+
+}
+
+
+
+/* GLYPH GRID */
+
+async function initGlyphs(el){
+
+
+let family =
+await loadFont(
+el.dataset.font,
+el.dataset.style || "regular"
+);
 
 
 if(!family) return;
 
 
-const chars =
+let chars =
 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?&@";
 
 
 el.innerHTML="";
 
 
-chars.split("").forEach(ch=>{
+chars.split("").forEach(c=>{
 
-const box =
+
+let d =
 document.createElement("div");
 
-box.innerHTML = ch;
 
-box.style.fontFamily =
-family;
-
-box.className =
+d.className =
 "pn-glyph";
 
 
-el.appendChild(box);
+d.style.fontFamily =
+family;
+
+
+d.textContent=c;
+
+
+el.appendChild(d);
+
 
 });
+
 
 }
 
 
-/* =========================
-INIT ENGINE
-========================= */
 
-function initTypeEngine(){
+/* INIT */
+
+function init(){
 
 
 document
 .querySelectorAll(".pn-type-canvas")
-.forEach(drawCanvas);
-
+.forEach(initCanvas);
 
 
 document
 .querySelectorAll(".pn-glyph-grid")
-.forEach(drawGlyphGrid);
+.forEach(initGlyphs);
 
 
 }
 
 
-/* =========================
-SPARK DARK MODE WATCHER
-========================= */
 
-const observer =
+/* WATCH SPARK THEME */
+
 new MutationObserver(()=>{
 
 
-PN_RENDERERS.forEach(
-render=>render()
-);
+canvasRenders.forEach(fn=>fn());
 
 
-});
-
-
-observer.observe(
+})
+.observe(
 document.documentElement,
 {
 attributes:true,
@@ -255,13 +239,6 @@ attributeFilter:["class"]
 }
 );
 
-
-
-/* =========================
-START
-========================= */
-
-loadFonts();
 
 
 })();
