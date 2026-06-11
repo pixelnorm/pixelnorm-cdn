@@ -1,0 +1,110 @@
+.pn-font-tester {
+    width:100%;
+    color:currentColor;
+    font-family:inherit;
+}
+
+
+.pn-tester-head {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid currentColor;
+    padding-bottom:30px;
+    margin-bottom:40px;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+}
+
+
+.pn-controls {
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:40px;
+    margin-bottom:40px;
+
+}
+
+
+.pn-control label {
+
+    display:flex;
+    justify-content:space-between;
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    margin-bottom:15px;
+
+}
+
+
+.pn-control input {
+
+    width:100%;
+
+}
+
+
+.pn-style-list {
+
+    display:flex;
+    gap:25px;
+    margin-bottom:40px;
+
+}
+
+
+.pn-style-btn {
+
+    background:none;
+    border:0;
+    color:currentColor;
+    opacity:.4;
+    cursor:pointer;
+    padding:0;
+
+}
+
+
+.pn-style-btn.active {
+
+    opacity:1;
+    text-decoration:underline;
+
+}
+
+
+.pn-canvas-wrap {
+
+    border-top:1px solid currentColor;
+    border-bottom:1px solid currentColor;
+
+}
+
+
+.pn-type-canvas {
+
+    width:100%;
+    display:block;
+
+}
+
+
+.pn-hidden-input {
+
+    position:absolute;
+    opacity:0;
+    pointer-events:none;
+
+}
+
+
+
+@media(max-width:700px){
+
+.pn-controls {
+grid-template-columns:1fr;
+}
+
+}
