@@ -1,169 +1,129 @@
-/*
-====================================
-PixelNorm Type Engine
-Canvas Font Renderer
-Version 1.2
-====================================
-*/
+/* ==================================================
+   PixelNorm Type Engine 001
+   Canvas Font Renderer
+   ================================================== */
 
 (function(){
-
 
 const CDN =
 "https://cdn.jsdelivr.net/gh/pixelnorm/pixelnorm-cdn@main/";
 
-
-const MANIFEST =
-CDN + "squarespace/type-engine/fonts.json";
-
-
-const FONT_ROOT =
-CDN + "assets/f/p/";
+const FONT_JSON =
+CDN + "squarespace/type-engine-001/fonts.json";
 
 
-let catalogue = {};
-let loaded = {};
+let PN_FONTS = {};
+let PN_RENDERERS = [];
 
 
+/* =========================
+LOAD FONT DATABASE
+========================= */
 
-async function init(){
+async function loadFonts(){
 
-const r = await fetch(MANIFEST);
+const res = await fetch(FONT_JSON);
+PN_FONTS = await res.json();
 
-catalogue = await r.json();
-
-console.log(
-"PixelNorm Type Engine Ready",
-catalogue
-);
+initTypeEngine();
 
 }
 
 
+/* =========================
+LOAD PROTECTED FONT
+========================= */
 
-async function loadFont(fontKey,styleKey){
+async function loadFont(fontId, style){
 
+const font = PN_FONTS[fontId];
 
-const font =
-catalogue[fontKey];
+if(!font) return null;
 
+const item = font.styles[style];
 
-const style =
-font.styles[styleKey];
-
-
-const family =
-"pn-" + font.id + "-" + styleKey;
-
-
-
-if(loaded[family]){
-
-return family;
-
-}
-
+if(!item) return null;
 
 
 const url =
-
-FONT_ROOT +
-
+CDN +
+"assets/f/p/" +
 font.id +
-
 "/" +
-
 font.id +
-
 "-" +
-
-style.file +
-
+item.file +
 ".bin";
 
 
-
-console.log(
-"Fetching:",
-url
-);
-
-
-
-const buffer =
-await fetch(url)
+const buffer = await fetch(url)
 .then(r=>r.arrayBuffer());
 
 
-
-const blob =
-new Blob([buffer]);
-
-
-
-const objectURL =
-URL.createObjectURL(blob);
-
-
-
-const face =
-new FontFace(
-
-family,
-
-"url(" + objectURL + ")"
-
+const blob = new Blob(
+[buffer],
+{type:"font/woff2"}
 );
 
 
-
-await face.load();
-
-
-document.fonts.add(face);
-
-
-
-loaded[family]=true;
-
-
-
-console.log(
-"Font active:",
-family
+const fontFace = new FontFace(
+font.name + "-" + style,
+`url(${URL.createObjectURL(blob)})`
 );
 
 
+await fontFace.load();
 
-return family;
+document.fonts.add(fontFace);
 
+return fontFace.family;
 
 }
 
 
+/* =========================
+THEME COLOR
+========================= */
+
+function getCanvasColor(){
+
+return document.documentElement
+.classList
+.contains("spark-dark")
+? "#ffffff"
+: "#000000";
+
+}
 
 
-async function render(options){
+/* =========================
+CANVAS DRAW
+========================= */
+
+async function drawCanvas(canvas){
+
+const fontId =
+canvas.dataset.font;
+
+const style =
+canvas.dataset.style || "regular";
+
+const text =
+canvas.dataset.text || "Sample Text";
 
 
 const family =
-await loadFont(
-options.font,
-options.style
-);
+await loadFont(fontId,style);
 
 
-
-const canvas =
-document.querySelector(
-options.target
-);
+if(!family) return;
 
 
 const ctx =
 canvas.getContext("2d");
 
 
+function render(){
 
 ctx.clearRect(
 0,
@@ -173,102 +133,135 @@ canvas.height
 );
 
 
-
 ctx.fillStyle =
-options.color || "#000";
+getCanvasColor();
 
+
+ctx.textBaseline =
+"middle";
 
 
 ctx.font =
-(options.size || 150)
-
-+ "px '" +
-
-family +
-
-"'";
-
+"90px '" + family + "'";
 
 
 ctx.fillText(
-options.text,
-
+text,
 40,
-
-180
-
+canvas.height/2
 );
-
 
 }
 
 
+render();
 
 
+PN_RENDERERS.push(render);
 
-async function glyphs(target,font,style){
+}
+
+
+/* =========================
+GLYPH GRID
+========================= */
+
+async function drawGlyphGrid(el){
+
+const fontId =
+el.dataset.font;
+
+const style =
+el.dataset.style || "regular";
 
 
 const family =
-await loadFont(
-font,
-style
-);
+await loadFont(fontId,style);
 
 
-
-const holder =
-document.querySelector(target);
+if(!family) return;
 
 
 const chars =
 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?&@";
 
 
-holder.innerHTML="";
+el.innerHTML="";
 
 
+chars.split("").forEach(ch=>{
 
-chars.split("").forEach(c=>{
-
-
-let d =
+const box =
 document.createElement("div");
 
+box.innerHTML = ch;
 
-d.className =
+box.style.fontFamily =
+family;
+
+box.className =
 "pn-glyph";
 
 
-d.style.fontFamily =
-"'" + family + "'";
-
-
-d.innerHTML=c;
-
-
-holder.appendChild(d);
-
+el.appendChild(box);
 
 });
+
+}
+
+
+/* =========================
+INIT ENGINE
+========================= */
+
+function initTypeEngine(){
+
+
+document
+.querySelectorAll(".pn-type-canvas")
+.forEach(drawCanvas);
+
+
+
+document
+.querySelectorAll(".pn-glyph-grid")
+.forEach(drawGlyphGrid);
 
 
 }
 
 
+/* =========================
+SPARK DARK MODE WATCHER
+========================= */
 
-window.PixelNormType={
-
-render,
-
-glyphs
-
-};
+const observer =
+new MutationObserver(()=>{
 
 
+PN_RENDERERS.forEach(
+render=>render()
+);
 
-init();
 
+});
+
+
+observer.observe(
+document.documentElement,
+{
+attributes:true,
+attributeFilter:["class"]
+}
+);
+
+
+
+/* =========================
+START
+========================= */
+
+loadFonts();
 
 
 })();
