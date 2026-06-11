@@ -1,0 +1,147 @@
+/* PIXELNORM TYPE ENGINE 008 */
+
+.pn-type-engine {
+    width:100%;
+    color:currentColor;
+}
+
+
+/* FONT NAME CANVAS */
+
+.pn-title-canvas {
+    width:100%;
+    height:260px;
+    display:block;
+    border-bottom:1px solid currentColor;
+}
+
+
+
+/* TESTER */
+
+.pn-tester {
+
+    border-bottom:1px solid currentColor;
+    padding-bottom:60px;
+}
+
+
+.pn-tester-head {
+
+    display:flex;
+    justify-content:space-between;
+
+    font-size:12px;
+    letter-spacing:5px;
+    text-transform:uppercase;
+
+    padding:35px 0;
+}
+
+
+.pn-controls {
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:40px;
+
+    margin-bottom:35px;
+}
+
+
+.pn-control label {
+
+    display:block;
+
+    font-size:9px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+
+    margin-bottom:20px;
+}
+
+
+.pn-control input {
+
+    width:100%;
+}
+
+
+
+.pn-style-list {
+
+    display:flex;
+    gap:35px;
+
+    margin-bottom:40px;
+}
+
+
+.pn-style-btn {
+
+    cursor:pointer;
+    opacity:.45;
+}
+
+
+.pn-style-btn.active {
+
+    opacity:1;
+    text-decoration:underline;
+}
+
+
+
+.pn-editor {
+
+    position:absolute;
+    opacity:0;
+    pointer-events:none;
+}
+
+
+
+.pn-test-canvas {
+
+    width:100%;
+    min-height:360px;
+
+    display:block;
+
+    cursor:text;
+}
+
+
+
+
+/* GLYPHS */
+
+.pn-glyph-grid {
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fill,minmax(80px,1fr));
+
+    gap:10px;
+
+    padding-top:70px;
+}
+
+
+.pn-glyph {
+
+    height:80px;
+
+    border:1px solid currentColor;
+}
+
+
+
+@media(max-width:800px){
+
+    .pn-controls {
+
+        grid-template-columns:1fr;
+    }
+}
