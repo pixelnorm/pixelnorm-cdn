@@ -9,12 +9,10 @@
         "label": "Light",
         "file": "01"
       },
-
       "regular": {
         "label": "Regular",
         "file": "02"
       },
-
       "bold": {
         "label": "Bold",
         "file": "03"
