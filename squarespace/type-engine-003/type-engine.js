@@ -9,7 +9,7 @@ const CDN =
 "https://cdn.jsdelivr.net/gh/pixelnorm/pixelnorm-cdn@main/";
 
 const FONT_JSON =
-CDN + "squarespace/type-engine-001/fonts.json";
+CDN + "squarespace/type-engine-003/fonts.json";
 
 
 let fonts = {};
